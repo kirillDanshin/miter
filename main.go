@@ -14,6 +14,21 @@ func main() {
 	app.Usage = "Calculates the ratio of given proportions."
 	app.Version = "0.0.1"
 
+	var widthFlag string
+	var heightFlag string
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:        "w",
+			Usage:       "Width to get the corresponding height",
+			Destination: &widthFlag,
+		},
+		cli.StringFlag{
+			Name:        "hh",
+			Usage:       "Height to get the corresponding width",
+			Destination: &heightFlag,
+		},
+	}
+
 	app.Action = func(c *cli.Context) error {
 		if len(c.Args()) <= 1 || len(c.Args()) > 2 {
 			fmt.Println("Invalid number of parameters.")
@@ -26,9 +41,13 @@ func main() {
 				if errh != nil {
 					fmt.Println("The height is invalid.")
 				} else {
-					gcd := gcd(width, height)
-					fmt.Println("The ratio is: " + strconv.Itoa(width/gcd) + ":" + strconv.Itoa(height/gcd))
-					fmt.Println("The percentage is: " + strconv.FormatFloat(float64(height)/float64(width)*float64(100), 'f', 6, 64) + "%")
+					if widthFlag != "" || heightFlag != "" {
+						calculateSide(widthFlag, heightFlag, width, height)
+					} else {
+						gcd := gcd(width, height)
+						fmt.Println("The ratio is: " + strconv.Itoa(width/gcd) + ":" + strconv.Itoa(height/gcd))
+						fmt.Println("The percentage is: " + strconv.FormatFloat(float64(height)/float64(width)*float64(100), 'f', 2, 64) + "%")
+					}
 				}
 			}
 		}
@@ -44,4 +63,12 @@ func gcd(w, h int) int {
 		w, h = h, w%h
 	}
 	return w
+}
+
+func calculateSide(w, h string, width, height int) {
+	if w != "" {
+
+	} else {
+
+	}
 }
