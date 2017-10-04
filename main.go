@@ -67,8 +67,12 @@ func gcd(w, h int) int {
 
 func calculateSide(w, h string, width, height int) {
 	if w != "" {
-
+		w, _ := strconv.Atoi(w)
+		newValue := w * height / width
+		fmt.Println("The new height is: ", strconv.FormatFloat(float64(newValue), 'f', 0, 64))
 	} else {
-
+		h, _ := strconv.Atoi(h)
+		newValue := h * width / height
+		fmt.Println("The new width is: ", strconv.FormatFloat(float64(newValue), 'f', 0, 64))
 	}
 }
