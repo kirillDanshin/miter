@@ -1,6 +1,6 @@
 # 📐 miter
 
-## commands
+## Documentation
 
 To get the ratio and the percentage between two dimensions. The first one is the the width and the second argument is the height.
 
