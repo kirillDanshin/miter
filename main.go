@@ -12,18 +12,18 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "miter"
 	app.Usage = "Calculates the ratio of given proportions."
-	app.Version = "0.0.1"
+	app.Version = "1.0.1"
 
 	var widthFlag string
 	var heightFlag string
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
-			Name:        "w",
+			Name:        "width, w",
 			Usage:       "Width to get the corresponding height",
 			Destination: &widthFlag,
 		},
 		cli.StringFlag{
-			Name:        "hh",
+			Name:        "height, ht",
 			Usage:       "Height to get the corresponding width",
 			Destination: &heightFlag,
 		},
@@ -69,10 +69,10 @@ func calculateSide(w, h string, width, height int) {
 	if w != "" {
 		w, _ := strconv.Atoi(w)
 		newValue := w * height / width
-		fmt.Println("The new height is: ", strconv.FormatFloat(float64(newValue), 'f', 0, 64))
+		fmt.Println("The proportional height is: ", strconv.FormatFloat(float64(newValue), 'f', 0, 64))
 	} else {
 		h, _ := strconv.Atoi(h)
 		newValue := h * width / height
-		fmt.Println("The new width is: ", strconv.FormatFloat(float64(newValue), 'f', 0, 64))
+		fmt.Println("The proportional width is: ", strconv.FormatFloat(float64(newValue), 'f', 0, 64))
 	}
 }
