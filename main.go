@@ -30,26 +30,28 @@ func main() {
 	}
 
 	app.Action = func(c *cli.Context) error {
-		if len(c.Args()) <= 1 || len(c.Args()) > 2 {
+		if len(c.Args()) != 2 {
 			fmt.Println("Invalid number of parameters.")
+			return nil
+		}
+
+		width, errw := strconv.Atoi(c.Args()[0])
+		if errw != nil {
+			fmt.Println("The width is invalid.")
+			return nil
+		}
+
+		height, errh := strconv.Atoi(c.Args()[1])
+		if errh != nil {
+			fmt.Println("The height is invalid.")
+			return nil
+		}
+		if widthFlag != "" || heightFlag != "" {
+			calculateSide(widthFlag, heightFlag, width, height)
 		} else {
-			width, errw := strconv.Atoi(c.Args()[0])
-			if errw != nil {
-				fmt.Println("The width is invalid.")
-			} else {
-				height, errh := strconv.Atoi(c.Args()[1])
-				if errh != nil {
-					fmt.Println("The height is invalid.")
-				} else {
-					if widthFlag != "" || heightFlag != "" {
-						calculateSide(widthFlag, heightFlag, width, height)
-					} else {
-						gcd := gcd(width, height)
-						fmt.Println("The ratio is: " + strconv.Itoa(width/gcd) + ":" + strconv.Itoa(height/gcd))
-						fmt.Println("The percentage is: " + strconv.FormatFloat(float64(height)/float64(width)*float64(100), 'f', 2, 64) + "%")
-					}
-				}
-			}
+			gcd := gcd(width, height)
+			fmt.Println("The ratio is: " + strconv.Itoa(width/gcd) + ":" + strconv.Itoa(height/gcd))
+			fmt.Println("The percentage is: " + strconv.FormatFloat(float64(height)/float64(width)*float64(100), 'f', 2, 64) + "%")
 		}
 
 		return nil
